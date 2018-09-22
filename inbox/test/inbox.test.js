@@ -22,6 +22,15 @@ const {interface, bytecode} = require('../compile')
 let accounts
 let inbox
 beforeEach(async () => {
+  accounts = await web3.eth.getAccounts()
+
+  let contractsDefaults = ['Hi there!']
+  //inbox will be the reference to the actual contract stored in the blockchain. We will be able to call methods on it
+  inbox = await new web3.eth.Contract(JSON.parse(interface)) //Contract interface
+    .deploy({data: bytecode, arguments: contractsDefaults}) //Set up the contract
+    .send({from: accounts[0], gas: '1000000'}) //Send the contract from account[0] (provided by ganache)
+})
+
 describe('Inbox', () => {
   it('Deploys a contract', () => {
     console.log(inbox)
@@ -29,8 +38,21 @@ describe('Inbox', () => {
     assert.ok(inbox.options.address)
   })
 
-  it('Contract has a default message', () =>{
+  it('Contract has a default message', async () => {
+    //inbox is the reference to the contract object
+    //methods to access the methods of the contract
+    //message() to call the function with certain amount of arguments
+    //call() to give certain arguments to the transaction we are going to send to the network
+    const message = await inbox.methods.message().call();
 
+    assert.equal(message, 'Hi there!')
+  })
+
+  it('Can change the message', async () => {
+    await inbox.methods.setMessage('Changed Message').send({from: accounts[0]})
+
+    const message = await inbox.methods.message().call()
+    assert.equal(message, 'Changed Message')
   })
 })
 
