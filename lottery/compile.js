@@ -7,7 +7,7 @@ const solc = require('solc')
 
 
 //Path that works universally with any OS
-const lotteryPath = path.resolve(__dirname, 'contracts', 'Lottery.sol')
+const lotteryPath = path.resolve(__dirname, 'contracts', 'Lottery_with.sol')
 const source = fs.readFileSync(lotteryPath, 'utf8')
 
 // let contract = solc.compile(source,1).contracts[':lottery']
