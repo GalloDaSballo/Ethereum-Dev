@@ -18,6 +18,7 @@ const deploy = async () => {
     .deploy({data: '0x' + bytecode})
     .send({gas: 1000000, from: accounts[0]})
 
+  console.log(interface) //to copy and give to web3 to have a frontend interface
   console.log('Contract deployed to: ', result.options.address)
 }
 deploy()
