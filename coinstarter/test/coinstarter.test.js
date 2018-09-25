@@ -77,7 +77,7 @@ describe('Campaigns test', () => {
     assert.equal('Spese Varie', request.description);
     assert.equal('100', request.value);
   })
-  it('Process Request', async () => {
+  it('Process Request from start to finish', async () => {
     await campaign.methods.contribute().send({
       from: accounts[0],
       value: web3.utils.toWei('10', 'ether')
@@ -103,5 +103,35 @@ describe('Campaigns test', () => {
     balance = parseFloat(balance)
 
     assert(balance > 104)
+  })
+  /** Permission Denied Tests */
+  it('Non Manager cannot initiate payment request', async () => {
+    try{
+      await campaign.methods
+        .createRequest('Spese Varie', '100', accounts[0]).send({
+        from: accounts[1],
+        gas: 1000000
+      })
+      assert(false)
+    } catch(err){
+      assert(err)
+    }
+  })
+
+  it('Non Manager cannot finalize payment request', async () => {
+    try{
+      await campaign.methods
+        .createRequest('Spese Varie', '100', accounts[0]).send({
+        from: accounts[0],
+        gas: 1000000
+      })
+      await campaign.methods.finalizeRequest(0).send({
+        from: accounts[1],
+        gas: 1000000
+      })
+      assert(false)
+    } catch(err){
+      assert(err)
+    }
   })
 })
