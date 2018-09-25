@@ -2,6 +2,7 @@ const HDWalletProvider = require('truffle-hdwallet-provider')
 const Web3 = require('web3')
 const compiledFactory = require('./build/CampaignFactory.json')
 
+
 //Our wallet with our real key, the mnemonic phrase and the link to the node
 const provider = new HDWalletProvider(
   'merge few cherry glare next inject trigger top load next tube charge',
