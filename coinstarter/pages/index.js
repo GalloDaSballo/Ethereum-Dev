@@ -1,18 +1,42 @@
 import React, {Component} from 'react'
 import factory from '../ethereum/factory'
+import {Card} from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
+import Layout from '../components/layout'
+
 
 class CampaignIndex extends Component{
-  async componentDidMount(){
+  //Next wants the initial data without having to render the component
+  //Hence it wants the static function
+  static async getInitialProps(){
     const campaigns = await factory.methods.getDeployedCampaigns().call()
-
-    console.log(campaigns)
+    //Now campaigns is fetched in the server and passed on the frontend
+    return {campaigns}
   }
 
+  renderCampaigns(){
+    const items = this.props.campaigns.map(address => {
+      return{
+        header: address,
+        description: <a>View Campaign</a>,
+        fluid: true //Makes the components get fluid
+      }
+    })
+    return <Card.Group items={items} />
+  }
   render(){
     return(
       <div>
-        <h1>Campaigns Index!</h1>
-      </div>)
+        <Layout>
+          <div>
+            <h2>Open Campaigns</h2>
+            {/* Primary will get turned into primary='true' */}
+            <Button floated="right" content='Create Campaign' icon='add' primary />
+            <div>{this.renderCampaigns()}</div>
+          </div>
+        </Layout>
+      </div>
+    )
   }
 }
 
