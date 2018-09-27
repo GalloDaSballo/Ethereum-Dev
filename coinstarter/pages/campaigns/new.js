@@ -3,6 +3,7 @@ import Layout from '../../components/layout'
 import {Form, Input, Button, Message} from 'semantic-ui-react'
 import factory from '../../ethereum/factory'
 import web3 from '../../ethereum/web3'
+import {Router} from '../../routes'
 
 class CampaignNew extends Component{
   state = {
@@ -27,6 +28,7 @@ class CampaignNew extends Component{
       this.setState({errorMessage: err.message})
     }
     this.setState({loading: false})
+    Router.pushRoute('/')
   }
 
   render(){

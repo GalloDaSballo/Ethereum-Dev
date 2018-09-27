@@ -86,4 +86,19 @@ contract Coinstarter{
         request.recipient.transfer(request.value);
         request.complete = true;
     }
+
+    function getSummary() public view
+      returns(uint, uint, uint, address)
+    {
+      return(
+        minimumContribution,
+        address(this).balance, //amount of money avail to the contract
+        approversCount,
+        manager
+      );
+    }
+
+    function getRequestsCount() public view returns(uint){
+      return requests.length;
+    }
 }
