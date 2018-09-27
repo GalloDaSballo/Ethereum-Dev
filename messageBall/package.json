@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "create-react-app": "^1.5.2",
     "ganache-cli": "^6.1.8",
     "mocha": "^5.2.0",
     "solc": "^0.4.25",

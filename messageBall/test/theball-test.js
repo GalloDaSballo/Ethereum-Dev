@@ -50,12 +50,16 @@ describe('Contract Functionality', () => {
       from: accounts[1],
       value: web3.utils.toWei('6', 'ether') //6 ether
     })
+    const contractBalance = await web3.eth.getBalance(contract.options.address)
+    console.log("contractBalance in ETH", web3.utils.fromWei(contractBalance, 'ether'))
+
     //Pay the owner = accounts[0]
     await contract.methods.payOwner().send({
       from: accounts[0]
     })
+
     const managerBalanceAfter= await web3.eth.getBalance(accounts[0])
-    
+
     //We expect the difference to be more than 5, less than 6 (due to fees)
     assert(web3.utils.fromWei((managerBalanceAfter - managerBalanceBefore).toString(), 'ether') > 5)
   })
