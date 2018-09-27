@@ -1,6 +1,6 @@
 const HDWalletProvider = require('truffle-hdwallet-provider')
 const Web3 = require('web3')
-const compiledFactory = require('./build/CampaignFactory.json')
+const compiledFactory = require('./build/TheBall.json')
 
 
 //Our wallet with our real key, the mnemonic phrase and the link to the node
