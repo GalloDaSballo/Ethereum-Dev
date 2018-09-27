@@ -7,7 +7,7 @@ const ganache = require('ganache-cli')
 const Web3 = require('web3')
 const web3 = new Web3(ganache.provider())
 
-const compiledContract = require('../ethereum/build/TheBall.json')
+const compiledContract = require('../frontend/src/ethereum/build/TheBall.json')
 
 //We ensure we have a deployed contract before each test
 beforeEach(async () => {
