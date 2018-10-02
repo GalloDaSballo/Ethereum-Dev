@@ -30,16 +30,21 @@ class App extends Component {
   }
 
   onSubmit = async () => {
+    console.log("Update message")
     this.setState({loadingContribution: true})
     try{
       const accounts = await web3.eth.getAccounts()
-      await instance.methods
-        .changeMessage(this.state.formMessage)
-        .send({
-          from: accounts[0],
-          value: web3.utils.toWei(this.state.contribution.toString(), 'ether')
-        })
-        this.updateMessage()
+      if(accounts){
+        await instance.methods
+          .changeMessage(this.state.formMessage)
+          .send({
+            from: accounts[0],
+            value: web3.utils.toWei(this.state.contribution.toString(), 'ether')
+          })
+          this.updateMessage()
+      } else {
+        throw "No accounts. You need to login to metamask"
+      }
     } catch(err){
       this.setState({errorMessage: err.message})
     }
