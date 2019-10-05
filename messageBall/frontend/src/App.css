@@ -1,7 +1,7 @@
 .ball{
   border-radius: 50%;
-  height: 960px;
-  width: 960px;
+  height: 680px;
+  width: 680px;
   margin: auto;
   background-image: url('blackball.png');
   background-size: cover;
@@ -10,8 +10,8 @@
 }
 
 .white-center{
-  height: 250px;
-  max-width: 250px;
+  height: 150px;
+  max-width: 150px;
   margin: auto;
   border-radius: 100%;
   background: white;
@@ -32,8 +32,8 @@
   flex: 1;
   align-items: center;
   border-radius: 100%;
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 100px;
+  max-height: 100px;
   margin: auto;
   text-align: center;
 }

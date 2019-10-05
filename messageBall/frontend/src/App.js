@@ -49,6 +49,7 @@ class App extends Component {
       this.setState({errorMessage: err.message})
     }
     this.setState({loadingContribution: false})
+    this.setState({isModalOpen: false})
   }
 
   openModal = () => {
@@ -65,44 +66,43 @@ class App extends Component {
       <Container>
         <h1>The Ball</h1>
         <h3>Powered by Ethereum</h3>
+        <Ball message={this.state.message} loadMessage={this.onClick}/>
+
         <p>This ball shows a single and unique message coming from the ethereum blockchain </p>
         <p>To change the text, use this button and fill the form <Button onClick={this.openModal} primary>Change the Text</Button></p>
-          <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css"></link>
-          {/* <Button loading={this.state.loadingMessage} onClick={this.onClick}>Update the Message</Button>
-          <p>The Message: {this.state.message}</p> */}
-          <Button className="showModal" primary onClick={this.openModal}>Change the Text</Button>
-          <Modal open={this.state.isModalOpen} closeOnDocumentClick={true} onClose={this.closeModal}>
-            <Modal.Header>Change the Text</Modal.Header>
-            <Modal.Content>
-              <Modal.Description>
-                <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                  <Form.Field>
-                      <label>Write a new message</label>
-                      <Input
-                        value={this.state.formMessage}
-                        onChange={event => this.setState({formMessage: event.target.value})}
-                        name="Submit a Message"
-                      />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Make a small contribution</label>
+        <Button className="showModal" primary onClick={this.openModal}>Change the Text</Button>
+        <Modal open={this.state.isModalOpen} closeOnDocumentClick={true} onClose={this.closeModal}>
+          <Modal.Header>Change the Text</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                <Form.Field>
+                    <label>Write a new message</label>
                     <Input
-                      type="number"
-                      value={this.state.contribution}
-                      onChange={event => this.setState({contribution: event.target.value})}
-                      name="Contribution"
-                      label="ether"
-                      labelPosition="right"
+                      value={this.state.formMessage}
+                      onChange={event => this.setState({formMessage: event.target.value})}
+                      name="Submit a Message"
                     />
-                  </Form.Field>
-                  <Button loading={this.state.loadingContribution} primary>Let's change the thingy</Button>
-                  <Message error header="Woops! Error" content={this.state.errorMessage} />
-                </Form>
-              </Modal.Description>
-            </Modal.Content>
-          </Modal>
+                </Form.Field>
+                <Form.Field>
+                  <label>Make a small contribution</label>
+                  <Input
+                    type="number"
+                    value={this.state.contribution}
+                    onChange={event => this.setState({contribution: event.target.value})}
+                    name="Contribution"
+                    label="ether"
+                    labelPosition="right"
+                  />
+                </Form.Field>
+                <Button loading={this.state.loadingContribution} primary>Let's change the thingy</Button>
+                <Message error header="Woops! Error" content={this.state.errorMessage} />
+              </Form>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
 
-          <Ball message={this.state.message} loadMessage={this.onClick}/>
+
       </Container>
     );
   }
